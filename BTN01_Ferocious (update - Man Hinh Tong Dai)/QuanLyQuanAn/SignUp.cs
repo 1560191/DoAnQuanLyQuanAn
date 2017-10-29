@@ -49,6 +49,7 @@ namespace QuanLyQuanAn
                 {
                     HoatDongTongDai hdtd = new HoatDongTongDai();
                     this.Hide();
+                    hdtd.Message21 = userName;
                     hdtd.ShowDialog();
                     this.Show();
                 }

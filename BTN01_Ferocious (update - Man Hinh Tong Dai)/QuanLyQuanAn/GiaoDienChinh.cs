@@ -20,9 +20,11 @@ namespace QuanLyQuanAn
         SqlConnection connection;
         SqlConnection connection2;
         SqlConnection connection3;
+        SqlConnection connection4;
         SqlCommand command;
         SqlCommand command2;
         SqlCommand command3;
+        SqlCommand command4;
         public GiaoDienChinh()
         {
             InitializeComponent();
@@ -150,7 +152,7 @@ namespace QuanLyQuanAn
 
         private void btNhanHoaDon_Click(object sender, EventArgs e)
         {
-            MessageBox.Show("Chức Năng Hiện Chưa Có!", "Thông Báo", MessageBoxButtons.OK);
+            XuatHoaDon();
         }
 
         //lay du lieu tu dataTable vao textbox
@@ -172,13 +174,16 @@ namespace QuanLyQuanAn
         {
             connection2 = new SqlConnection(connectinonST);
             connection2.Open();
-           
-            string query2 = "insert into info_HOADON(IDHoaDon,IDMonAn,TenMonAn,DonGia,SoLuong) values(1,1,'"+tbDichVu.Text+"','"+tbDonGia.Text+"','"+tbSoLuong.Text+"')";
+
+            string query2 = "exec Gui1 '" + tbDichVu.Text + "', '" + tbSoLuong.Text + "'";
             SqlCommand command2 = new SqlCommand(query2, connection2);
-            command2.ExecuteNonQuery();
+            //command2.ExecuteNonQuery();
             MessageBox.Show("Đã Thêm Thành Công!","Thông Báo",MessageBoxButtons.OK);
             connection2.Close();
-
+            XuatHoaDon();
+        }
+        private void XuatHoaDon()
+        {
             connection3 = new SqlConnection(connectinonST);
             connection3.Open();
             string query3 = "SELECT iHD.TenMonAn, iHD.DonGia, iHD.SoLuong FROM info_HOADON iHD, HOADON HD WHERE iHD.IDHoaDon = HD.ID";
